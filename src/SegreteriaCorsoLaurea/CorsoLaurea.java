@@ -87,23 +87,16 @@ public class CorsoLaurea
 	
 	public String stampaListaStudenti (Boolean laureati)
 	{
-		String s = "Lista studenti:\n";
+		String s = "Lista studenti\n";
+		s       += "==========================\n\n";
 		
 		for (int i = 0; i < this.listaStudenti.length; i++)
 		{
-			if (laureati)
-			{
-				if (this.listaStudenti[i] != null && this.listaStudenti[i].laureato)
-				{
-					s += this.listaStudenti[i].toString();
-					s += "\n";					
-				}
-			}
-			else if (this.listaStudenti[i] != null && !this.listaStudenti[i].laureato)
+			if (this.listaStudenti[i] != null && this.listaStudenti[i].laureato == laureati)
 			{
 				s += this.listaStudenti[i].toString();
-				s += "\n";
-			}	
+				s += "\n";					
+			}
 		}
 		
 		return s;
@@ -112,7 +105,8 @@ public class CorsoLaurea
 	public String toString()
 	{
 		String s = "CORSO: " + this.getNome() + " - " + this.getMinCrediti() + " CFU\n";
-		s += "Studenti iscritti:\n";
+		s += "Studenti iscritti\n";
+		s += "=============================\n\n";
 				
 		for (int i = 0; i < this.listaStudenti.length; i++)
 		{

@@ -7,6 +7,9 @@ public class Main {
 		CorsoLaurea cl = new CorsoLaurea("Ingegneria informatica e dell'automazione", 100);
 		Studente studenteSelezionato = null;
 		
+		// variabili in comune
+		String nome, matricola;
+		
 		int scelta;
 		Scanner in = new Scanner(System.in);
 		
@@ -14,7 +17,9 @@ public class Main {
 		
 		do
 		{
-			System.out.println("MENU CORSO DI LAUREA:");
+			System.out.println("+----------------------+");
+			System.out.println("| MENU CORSO DI LAUREA |");
+			System.out.println("+----------------------+");
 			System.out.println("1 - iscrivi studente (verra' selezionato per MENU STUDENTE)");
 			System.out.println("2 - ritira studente");
 			System.out.println("3 - ricerca studente (verra' selezionato per MENU STUDENTE)");
@@ -24,7 +29,7 @@ public class Main {
 			System.out.println("7 - accedi al MENU STUDENTI");
 			System.out.println("0 - chiudi programma");
 			
-			System.out.print("Digitare un comando: ");
+			System.out.print("> Digitare un comando: ");
 			scelta = in.nextInt();
 			
 			in.nextLine();
@@ -33,14 +38,12 @@ public class Main {
 			{
 				case 1:
 					// iscrizione studente
-					String nomeDaAggiungere, matricolaDaAggiungere;
-					
 					System.out.print("Inserire nome: ");
-					nomeDaAggiungere = in.nextLine();
+					nome = in.nextLine();
 					System.out.print("Inserire matricola: ");
-					matricolaDaAggiungere = in.nextLine();
+					matricola = in.nextLine();
 					
-					Studente s = new Studente(nomeDaAggiungere, matricolaDaAggiungere);
+					Studente s = new Studente(nome, matricola);
 					if (cl.iscriviStudente(s))
 					{
 						studenteSelezionato = s;
@@ -53,15 +56,13 @@ public class Main {
 					break;
 				case 2:
 					// ritira studente
-					String matricolaDaRimuovere;
-					
 					System.out.print("Inserire matricola dello studente da ritirare: ");
-					matricolaDaRimuovere = in.nextLine();
+					matricola = in.nextLine();
 					
-					if (cl.ritiraStudente(matricolaDaRimuovere))
+					if (cl.ritiraStudente(matricola))
 					{
-						System.out.println("Studente " + matricolaDaRimuovere + " ritirato.");
-						if (studenteSelezionato.getMatricola().equals(matricolaDaRimuovere))	
+						System.out.println("Studente " + matricola + " ritirato.");
+						if (studenteSelezionato.getMatricola().equals(matricola))	
 						{
 							studenteSelezionato = null;
 							System.out.println("=======>> Nessun studente selezionato per MENU STUDENTI");
@@ -73,12 +74,10 @@ public class Main {
 					break;
 				case 3:
 					// ricerca studente e selezione per MENU STUDENTI
-					String matricolaDaRicercare;
-					
 					System.out.print("Inserire matricola da ricercare: ");
-					matricolaDaRicercare = in.nextLine();
+					matricola = in.nextLine();
 					
-					Studente studTrovato = cl.cercaStudente(matricolaDaRicercare);
+					Studente studTrovato = cl.cercaStudente(matricola);
 					if (studTrovato != null)
 					{
 						studenteSelezionato = studTrovato;
@@ -91,15 +90,13 @@ public class Main {
 					break;
 				case 4:
 					// laurea studente
-					String matricolaDaLaureare;
-					
 					System.out.print("Inserire matricola da laureare: ");
-					matricolaDaLaureare = in.nextLine();
+					matricola = in.nextLine();
 					
-					if (cl.laureaStudente(matricolaDaLaureare))
+					if (cl.laureaStudente(matricola))
 					{
 						System.out.println("Studente laureato con successo");
-						if (studenteSelezionato.getMatricola().equals(matricolaDaLaureare))
+						if (studenteSelezionato.getMatricola().equals(matricola))
 						{
 							studenteSelezionato = null;
 							System.out.println("========>> Nessun studente selezionato per MENU STUDENTI");
@@ -136,7 +133,9 @@ public class Main {
 					
 					do
 					{
-						System.out.println("MENU STUDENTE");
+						System.out.println("+---------------+");
+						System.out.println("| MENU STUDENTE |");
+						System.out.println("+---------------+");
 						System.out.println("1 - aggiungi esame");
 						System.out.println("2 - rimuovi esame");
 						System.out.println("3 - cerca esame");
@@ -153,15 +152,14 @@ public class Main {
 						{
 							case 1:
 								// aggiungi esame
-								String nomeEsameDaAggiungere;
 								int numeroCrediti;
 								
 								System.out.print("Inserire il nome dell'esame: ");
-								nomeEsameDaAggiungere = in.nextLine();
+								nome = in.nextLine();
 								System.out.print("Inserire il numero di crediti dell'esame: ");
 								numeroCrediti = in.nextInt();
 								
-								Esame e = new Esame (nomeEsameDaAggiungere, numeroCrediti);
+								Esame e = new Esame (nome, numeroCrediti);
 								if (studenteSelezionato.aggiungiEsame(e))
 									System.out.println("Esame aggiunto correttamente");
 								else
@@ -170,12 +168,10 @@ public class Main {
 								break;
 							case 2:
 								// rimuovi esame
-								String nomeEsameDaRimuovere;
-								
 								System.out.print("Inserire il nome dell'esame da rimuovere: ");
-								nomeEsameDaRimuovere = in.nextLine();
+								nome = in.nextLine();
 								
-								if (studenteSelezionato.rimuoviEsame(nomeEsameDaRimuovere))
+								if (studenteSelezionato.rimuoviEsame(nome))
 									System.out.println("Esame rimosso correttamente");
 								else
 									System.out.println("Impossibile rimuovere l'esame");
@@ -183,12 +179,10 @@ public class Main {
 								break;
 							case 3:
 								// cerca esame
-								String nomeEsameDaCercare;
-								
 								System.out.print("Inserire il nome dell'esame da cercare: ");
-								nomeEsameDaCercare = in.nextLine();
+								nome = in.nextLine();
 								
-								Esame esameTrovato = studenteSelezionato.cercaEsame(nomeEsameDaCercare);
+								Esame esameTrovato = studenteSelezionato.cercaEsame(nome);
 								if (esameTrovato != null)
 									System.out.println("Esame trovato:\n" + esameTrovato.toString());
 								else
@@ -197,15 +191,14 @@ public class Main {
 								break;
 							case 4:
 								// promuovi ad un esame
-								String nomeEsameDaPromuovere;
 								double votoEsame;
 								
 								System.out.print("Inserire il nome dell'esame da promuovere: ");
-								nomeEsameDaPromuovere = in.nextLine();
+								nome = in.nextLine();
 								System.out.print("Inserire il voto: ");
 								votoEsame = in.nextDouble();
 								
-								if (studenteSelezionato.promuoviEsame(nomeEsameDaPromuovere, votoEsame))
+								if (studenteSelezionato.promuoviEsame(nome, votoEsame))
 									System.out.println("Esame promosso correttamente");
 								else
 									System.out.println("Impossibile promuovere l'esame");

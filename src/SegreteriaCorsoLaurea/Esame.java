@@ -55,10 +55,10 @@ public class Esame
 	
 	public String toString()
 	{
-		String s = "Esame di " + this.getNome() + " - " + this.getNumeroCrediti() + " CFU\n";
+		String s = "- Esame di " + this.getNome() + " - " + this.getNumeroCrediti() + " CFU\n";
 
 		if (this.getVoto() > 0)
-			s += "Promosso con " + this.getVoto() + " punti\n";
+			s += "    [Promosso con " + this.getVoto() + " punti] \n";
 		
 		return s;
 	}

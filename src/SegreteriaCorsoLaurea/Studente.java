@@ -5,16 +5,16 @@ public class Studente
 	public Boolean laureato;
 	public String nome;
 	public String matricola;
-	public int numeroCrediti;
 	public Esame[] pianoStudi;
+	public int numeroCrediti;
 	
 	public Studente (String nome, String matricola)
 	{
 		this.setNome(nome);
 		this.setMatricola(matricola);
-		this.pianoStudi = new Esame[10];
 		this.setLaureato(false);
 		this.setNumeroCrediti(0);
+		this.pianoStudi = new Esame[10];
 	}
 
 	public String getNome()
@@ -47,11 +47,13 @@ public class Studente
 		this.laureato = laureato;
 	}
 
-	public int getNumeroCrediti() {
+	public int getNumeroCrediti()
+	{
 		return numeroCrediti;
 	}
 
-	private void setNumeroCrediti(int numeroCrediti) {
+	private void setNumeroCrediti(int numeroCrediti)
+	{
 		this.numeroCrediti = numeroCrediti;
 	}
 
@@ -114,7 +116,7 @@ public class Studente
 		int numeroEsamiSuperati = 0;
 		String s = "";
 		
-		s += "Studente " + this.getNome() + " - matricola " + this.getMatricola() + "\n";
+		s += "-[Studente " + this.getNome() + " - matricola " + this.getMatricola() + "]-\n";
 		s += "Piano di studi:\n";
 		
 		for (int i = 0; i < this.pianoStudi.length; i++)
@@ -133,12 +135,13 @@ public class Studente
 		if (numeroEsamiSuperati > 0)
 			mediaVoti = mediaVoti / numeroEsamiSuperati;
 		
+		s += "-----------------------------\n";
 		s += numeroEsamiSuperati + " esami superati\n";
 		s += "Media dei voti: " + mediaVoti + "\n";
 		s += "Totale dei crediti: " + this.getNumeroCrediti() + "\n";
 		
 		if (this.getLaureato())
-			s += "STUDENTE LAUREATO\n";
+			s += " - STUDENTE LAUREATO -\n";
 		
 		return s;
 	}
